@@ -1,5 +1,4 @@
-import { NavLink } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const navItems = [
   {
@@ -90,6 +89,16 @@ if (!document.head.querySelector("[data-layout-styles]")) {
 }
 
 export default function Layout({ children }) {
+  const navigate = useNavigate();
+  const rawUser = localStorage.getItem("inv_user");
+  const user = rawUser ? JSON.parse(rawUser) : { username: "Admin", email: "" };
+  const initial = (user.username || "A")[0].toUpperCase();
+
+  function handleLogout() {
+    localStorage.removeItem("inv_user");
+    navigate("/login");
+  }
+
   return (
     <div style={{ display: "flex", minHeight: "100vh", fontFamily: "Inter, system-ui, sans-serif" }}>
       <aside
@@ -164,20 +173,41 @@ export default function Layout({ children }) {
 
         {/* Footer */}
         <div style={{
-          padding: "16px 20px",
+          padding: "12px 16px",
           borderTop: "1px solid rgba(255,255,255,0.06)",
-          display: "flex", alignItems: "center", gap: "8px",
         }}>
-          <div style={{
-            width: "28px", height: "28px", borderRadius: "50%",
-            background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "12px", fontWeight: 700, color: "white",
-          }}>A</div>
-          <div>
-            <div style={{ fontSize: "12px", fontWeight: 600, color: "#e2e8f0" }}>Admin</div>
-            <div style={{ fontSize: "10px", color: "#64748b" }}>v1.0.0</div>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+            <div style={{
+              width: "32px", height: "32px", borderRadius: "50%",
+              background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "13px", fontWeight: 700, color: "white", flexShrink: 0,
+            }}>{initial}</div>
+            <div style={{ overflow: "hidden" }}>
+              <div style={{ fontSize: "12px", fontWeight: 600, color: "#e2e8f0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{user.username}</div>
+              <div style={{ fontSize: "10px", color: "#64748b", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{user.email}</div>
+            </div>
           </div>
+          <button
+            onClick={handleLogout}
+            style={{
+              width: "100%", padding: "7px", borderRadius: "8px",
+              border: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(255,255,255,0.04)", color: "#94a3b8",
+              fontSize: "12px", fontWeight: 600, cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "center", gap: "6px",
+              transition: "background 0.2s, color 0.2s",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(239,68,68,0.15)"; e.currentTarget.style.color = "#f87171"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.color = "#94a3b8"; }}
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Logout
+          </button>
         </div>
       </aside>
 

@@ -5,6 +5,7 @@ from typing import List
 
 from app.database import get_db
 from app.models.product import Product
+from app.models.order import OrderItem
 from app.schemas.product import ProductCreate, ProductUpdate, ProductResponse
 
 router = APIRouter(prefix="/products", tags=["Products"])
@@ -57,5 +58,11 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    in_use = db.query(OrderItem).filter(OrderItem.product_id == product_id).first()
+    if in_use:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Cannot delete '{product.name}' — it is referenced in existing orders. Cancel those orders first.",
+        )
     db.delete(product)
     db.commit()
