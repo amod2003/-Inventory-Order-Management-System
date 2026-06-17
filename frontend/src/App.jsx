@@ -1,3 +1,4 @@
+// Root router — all pages are lazy-loaded via their own feature branches
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NotificationProvider } from "./context/NotificationContext";
 import Layout from "./components/Layout";
