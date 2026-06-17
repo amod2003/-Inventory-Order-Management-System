@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
-from app.routers import products
+from app.routers import products, customers
 
 load_dotenv()
 
@@ -21,6 +21,7 @@ app.add_middleware(
 )
 
 app.include_router(products.router)
+app.include_router(customers.router)
 
 
 @app.get("/")
