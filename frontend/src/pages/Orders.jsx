@@ -73,7 +73,7 @@ export default function Orders() {
                     </Link>
                   </td>
                   <td style={{ padding: "12px 16px", color: "#64748b" }}>#{o.customer_id}</td>
-                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>${Number(o.total_amount).toFixed(2)}</td>
+                  <td style={{ padding: "12px 16px", fontWeight: 600 }}>₹{Number(o.total_amount).toFixed(2)}</td>
                   <td style={{ padding: "12px 16px" }}><span style={statusStyle(o.status)}>{o.status}</span></td>
                   <td style={{ padding: "12px 16px", color: "#64748b", fontSize: "13px" }}>
                     {new Date(o.created_at).toLocaleDateString()}

@@ -49,7 +49,7 @@ export default function OrderDetail() {
         {[
           { label: "Customer ID", value: `#${order.customer_id}` },
           { label: "Order Date", value: new Date(order.created_at).toLocaleString() },
-          { label: "Total Amount", value: `$${Number(order.total_amount).toFixed(2)}` },
+          { label: "Total Amount", value: `₹${Number(order.total_amount).toFixed(2)}` },
           { label: "Items", value: `${order.items.length} item(s)` },
         ].map(({ label, value }) => (
           <div key={label} style={{ background: "#fff", borderRadius: "10px", padding: "18px", boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
@@ -73,9 +73,9 @@ export default function OrderDetail() {
             {order.items.map((item) => (
               <tr key={item.id} style={{ borderTop: "1px solid #f1f5f9" }}>
                 <td style={{ padding: "12px 16px" }}>#{item.product_id}</td>
-                <td style={{ padding: "12px 16px" }}>${Number(item.unit_price).toFixed(2)}</td>
+                <td style={{ padding: "12px 16px" }}>₹{Number(item.unit_price).toFixed(2)}</td>
                 <td style={{ padding: "12px 16px" }}>{item.quantity}</td>
-                <td style={{ padding: "12px 16px", fontWeight: 600 }}>${(Number(item.unit_price) * item.quantity).toFixed(2)}</td>
+                <td style={{ padding: "12px 16px", fontWeight: 600 }}>₹{(Number(item.unit_price) * item.quantity).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>

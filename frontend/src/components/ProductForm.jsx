@@ -65,7 +65,7 @@ export default function ProductForm({ initial, onClose, onSaved }) {
           {[
             { key: "name", label: "Product Name", type: "text", disabled: false },
             { key: "sku", label: "SKU / Code", type: "text", disabled: !!initial },
-            { key: "price", label: "Price ($)", type: "number", disabled: false },
+            { key: "price", label: "Price (₹)", type: "number", disabled: false },
             { key: "quantity", label: "Quantity in Stock", type: "number", disabled: false },
           ].map(({ key, label: lbl, type, disabled }) => (
             <div key={key} style={field}>

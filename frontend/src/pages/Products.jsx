@@ -95,7 +95,7 @@ export default function Products() {
                 <tr key={p.id} style={{ borderTop: "1px solid #f1f5f9" }}>
                   <td style={{ padding: "12px 16px", fontWeight: 500 }}>{p.name}</td>
                   <td style={{ padding: "12px 16px", color: "#64748b", fontSize: "13px" }}>{p.sku}</td>
-                  <td style={{ padding: "12px 16px" }}>${Number(p.price).toFixed(2)}</td>
+                  <td style={{ padding: "12px 16px" }}>₹{Number(p.price).toFixed(2)}</td>
                   <td style={{ padding: "12px 16px" }}>
                     <span style={{
                       padding: "2px 8px", borderRadius: "99px", fontSize: "12px", fontWeight: 600,
