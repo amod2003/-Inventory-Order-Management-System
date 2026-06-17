@@ -26,8 +26,6 @@ build/
 .DS_Store
 *.local
 
-# Docker
-.dockerignore
 
 # IDE
 .vscode/
