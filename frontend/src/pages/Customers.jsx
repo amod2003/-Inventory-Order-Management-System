@@ -1,0 +1,3 @@
+export default function Customers() {
+  return <div><h2>Customers</h2><p>Loading...</p></div>;
+}
